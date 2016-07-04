@@ -1,34 +1,59 @@
 db:
   image: postgres:9.4.5
+  restart: always
+  log_driver: "json-file"
+  log_opt:
+    max-size: "50m"
+    max-file: "7"
 
 memcached:
   image: memcached:1.4.27-alpine
+  restart: always
+  log_driver: "json-file"
+  log_opt:
+    max-size: "50m"
+    max-file: "7"
 
 redis:
   image: redis:3.2.1-alpine
+  restart: always
+  log_driver: "json-file"
+  log_opt:
+    max-size: "50m"
+    max-file: "7"
 
 web:
   image: russianpulse/mazavr-engine
   ports:
-    - "3000:3000"
+    - "80:3000"
   links: 
     - db
     - memcached
     - redis
   env_file:
     - .env
+  restart: always
+  log_driver: "json-file"
+  log_opt:
+    max-size: "50m"
+    max-file: "7"
 
 worker:
-  build: .
+  image: russianpulse/mazavr-engine
   links: 
     - db
     - memcached
     - redis
-  command: bundle exec sidekiq
+  command: ./bin/worker
   env_file:
     - .env
   volumes_from:
     - web
+  restart: always
+  log_driver: "json-file"
+  log_opt:
+    max-size: "50m"
+    max-file: "7"
 
 pg-backup:
   image: russianpulse/pg-backup
