@@ -1,0 +1,7 @@
+web:
+  environment:
+    - RAILS_ENV=test
+
+worker:
+  environment:
+    - RAILS_ENV=test
