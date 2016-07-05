@@ -39,6 +39,8 @@ web:
   log_opt:
     max-size: "50m"
     max-file: "7"
+  mem_limit: 500000000
+  memswap_limit: 500000000
 
 worker:
   image: russianpulse/mazavr-engine
@@ -58,6 +60,8 @@ worker:
   log_opt:
     max-size: "50m"
     max-file: "7"
+  mem_limit: 350000000
+  memswap_limit: 700000000
 
 pg-backup:
   image: russianpulse/pg-backup
