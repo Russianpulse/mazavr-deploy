@@ -32,6 +32,8 @@ web:
     - redis
   env_file:
     - .env
+  environment:
+    - RAILS_ENV=production
   restart: always
   log_driver: "json-file"
   log_opt:
@@ -47,6 +49,8 @@ worker:
   command: ./bin/worker
   env_file:
     - .env
+  environment:
+    - RAILS_ENV=production
   volumes_from:
     - web
   restart: always
