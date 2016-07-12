@@ -34,6 +34,7 @@ web:
     - .env
   environment:
     - RAILS_ENV=production
+    - PASSENGER_APP_ENV=production
   restart: always
   log_driver: "json-file"
   log_opt:
